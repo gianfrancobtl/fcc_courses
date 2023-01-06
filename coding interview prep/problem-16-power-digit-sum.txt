@@ -1,0 +1,9 @@
+function powerDigitSum(exponent) {
+
+  const num = BigInt(Math.pow(2, exponent));
+  const digits = num.toString().split('');
+
+  return digits.reduce((sum, digit) => sum + parseInt(digit), 0);
+}
+
+console.log(powerDigitSum(100));
