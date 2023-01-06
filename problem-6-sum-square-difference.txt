@@ -1,0 +1,12 @@
+function sumSquareDifference(n) {
+
+  let sum = 0;
+  let sum_bis = 0;
+  for (let num = 0; num <= n; num++){
+    sum += num**2;
+    sum_bis += num;
+  }
+  sum_bis *= sum_bis;
+
+  return sum_bis - sum;
+}

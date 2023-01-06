@@ -1,0 +1,25 @@
+function nthPrime(n) {
+  let prime_qty = 0;
+  let num = 2;
+
+  while (prime_qty < n){
+    if (isPrime(num)){
+      prime_qty ++;
+    }
+    num ++;
+  }
+  return num - 1;
+}
+
+function isPrime(n){
+  let res = true;
+  let i = 2;
+
+  while (i <= n/2 && res){
+    if (n % i == 0){
+      res = false;
+    }
+    i ++;
+  }
+  return res;
+}

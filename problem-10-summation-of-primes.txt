@@ -1,0 +1,38 @@
+function primeSummation(n) {
+  let res = 0;
+  
+  function isPrime(n){
+    let res = true;
+    let i = 2;
+
+    while (i <= Math.sqrt(n) && res){
+      if (n % i == 0){
+        res = false;
+      }
+      i ++;
+    }
+    return res;
+  }
+
+  for (let num = 2; num < n; num ++){
+    if (isPrime(num)){
+      res += num;
+    }
+  }
+  return res;
+}
+
+/*function primeSummationBis(n, m){
+
+  if (n >= m) {
+    return 0;
+  } else {
+    if (isPrime(n)){
+      return n + primeSummationBis(n + 2, m);
+    } else {
+      return primeSummationBis(n + 2, m);
+    }
+  }
+}*/
+
+console.log(primeSummation(2001));

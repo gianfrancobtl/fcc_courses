@@ -1,0 +1,29 @@
+function largestPalindromeProduct(n) {
+  let num = '';
+  let res = 0;
+  for (let i = 0; i < n; i ++){
+    num += '9';
+  }
+  num = parseInt(num);
+
+  for (let i = num; i != 0; i --){
+    for (let j = num; j != 0; j --){
+      if (isPalindrome(i*j) && i*j > res) {
+        res = i*j;
+      }
+    }
+  }
+  return res;
+}
+
+function isPalindrome(n){
+  let res = true;
+  n = n.toString();
+  for (let k = 0; k < n.length/2; k ++){
+    if (n[k] != n[n.toString().length - 1 - k])
+    {
+      res = false;
+    }
+  }
+  return res;
+}

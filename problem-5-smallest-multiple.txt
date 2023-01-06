@@ -1,0 +1,26 @@
+function smallestMult(n) {
+  let res = n;
+
+  let i = n - 1;
+  while(i > 1){
+    res = mcm(res, i);;
+    i --;
+  }
+  return res;
+}
+
+function mcm(n, m){
+  if (n == 0 && m == 0){
+    return 0;
+  } else {
+    return (n * m) / (mcd(n, m))
+  }
+}
+
+function mcd(n, m){
+  if (m == 0){
+    return n;
+  } else {
+    return mcd(m, n % m)
+  }
+}

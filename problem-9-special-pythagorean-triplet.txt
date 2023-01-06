@@ -1,0 +1,14 @@
+function specialPythagoreanTriplet(n) {
+  let sumOfabc = n;
+  let prod, c;
+  
+  for (let a = 0; a < n; a ++){
+    for (let b = a + 1; b < n; b ++){
+      c = Math.sqrt(a**2 + b**2);
+      if (a + b + c == sumOfabc){
+        prod = a*b*c;
+      }
+    }
+  }
+  return prod;
+}
