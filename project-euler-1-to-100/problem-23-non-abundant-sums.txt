@@ -1,0 +1,87 @@
+let SMALLEST_ABUNDANT_NUMBER = 12;
+let UPPER_ABUNDANT_NUMBER_LIMIT = 28123;
+let LOWER_ABUNDANT_NUMBER_LIMIT = 24;
+
+function findDivisors(number){
+  let divisorsOfNumber = [1];
+  for (let posibleDivisor = 2; posibleDivisor < number; posibleDivisor ++){
+    if (number % posibleDivisor == 0) {
+      divisorsOfNumber.push(posibleDivisor);
+    }
+  }
+  return divisorsOfNumber;
+}
+
+function findSumOfDivisorsOfNumber(divisorsOfNumber){
+  let sumOfDivisorsOfNumber = 0;
+  divisorsOfNumber.forEach(function(divisorOfNumber) {
+    sumOfDivisorsOfNumber += divisorOfNumber;
+  });
+  return sumOfDivisorsOfNumber;
+}
+
+function findAbundantNumbersLowerThan(m){
+  let abundantNumbersLowerThanM = [];
+
+  for (let number = SMALLEST_ABUNDANT_NUMBER; number < m; number ++){
+    let divisorsOfNumber = findDivisors(number);
+    let sumOfDivisorsOfNumber = findSumOfDivisorsOfNumber(divisorsOfNumber);
+
+    if (sumOfDivisorsOfNumber > number) {
+      abundantNumbersLowerThanM.push(number);
+    };
+  }
+
+  return abundantNumbersLowerThanM;
+}
+
+function findNumbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers(listOfAbundantNumbers) {
+  let numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers = [];
+
+  listOfAbundantNumbers.forEach(function(abundantNumber, index) {
+    listOfAbundantNumbers.slice(index).forEach(function(anotherAbundantNumber) {
+      const sum = abundantNumber + anotherAbundantNumber;
+      if (!numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers.includes(sum)) {
+        numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers.push(sum);
+      }
+    });
+  });
+  
+  return numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers;
+}
+
+function findComplement(list, upperBound) {
+  const numbersNotInList = [];
+  
+  // Crear un conjunto a partir de la lista para búsquedas más eficientes
+  const listSet = new Set(list);
+
+  for (let number = 1; number <= upperBound; number++) {
+    if (!listSet.has(number)) {
+      numbersNotInList.push(number);
+    }
+  }
+  return numbersNotInList;
+}
+
+function sumAllNumbers(listOfNumbers){
+  let sumOfNumbers = 0;
+  listOfNumbers.forEach(function(number) {
+    sumOfNumbers += number;
+  });
+  return sumOfNumbers;
+}
+
+function sumOfNonAbundantNumbers(n) {
+  let abundantNumbersLowerThanN = findAbundantNumbersLowerThan(n);
+
+  let numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers = findNumbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers (abundantNumbersLowerThanN);
+
+  let numbersWhichCannotBeWrittenAsTheSumOfTwoAbundantNumbers = findComplement(numbersWhichCanBeWrittenAsTheSumOfTwoAbundantNumbers, n);
+    
+  let sumOfPositiveIntegersWhichCannotBeWrittenAsTheSumOfTwoAbundantNumbers = sumAllNumbers(numbersWhichCannotBeWrittenAsTheSumOfTwoAbundantNumbers);
+    
+  return sumOfPositiveIntegersWhichCannotBeWrittenAsTheSumOfTwoAbundantNumbers;
+}
+
+sumOfNonAbundantNumbers(UPPER_ABUNDANT_NUMBER_LIMIT)
